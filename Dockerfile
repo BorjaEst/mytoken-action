@@ -20,13 +20,5 @@ RUN apt update && apt install --no-install-recommends -y \
     mytoken \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory inside the container
-WORKDIR /usr/src
-
-# Copy any source file(s) required for the action
-# COPY entrypoint.sh .
-
 # Configure the container to be run as an executable
-# ENTRYPOINT ["/usr/src/entrypoint.sh"]
-ENTRYPOINT [ "mytoken" ]
-
+ENTRYPOINT [ "mytoken", "AT"]

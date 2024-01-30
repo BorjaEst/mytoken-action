@@ -1,21 +1,20 @@
-name: Hello, World!
-description: Greet someone and record the time
-author: GitHub Actions
+name: MyToken Docker Action
+description: Github Action to obtain an OIDC access token form a MyToken secret
+author: Karlsruhe Institute of Technology
 
-# Define your inputs here.
 inputs:
-  who-to-greet:
-    description: Who to greet
+  my-token:
+    description: My token to use to retrieve the access token
     required: true
-    default: World
 
-# Define your outputs here.
 outputs:
-  time:
-    description: The time we greeted you
+  access-token:
+    description: The access token to use in future requests
 
 runs:
   using: docker
   image: Dockerfile
   env:
-    INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+    MY_TOKEN: ${{ inputs.my-token }}
+  args:
+    - "--MT--env=MY_TOKEN"
