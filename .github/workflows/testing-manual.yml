@@ -1,16 +1,15 @@
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-  hello_world_job:
+  get-access_token:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Get Access Token Test
     steps:
-      - name: Hello world action step
-        id: hello
+      - name: Obtain Access Token
+        id: at
         uses: BorjaEst/mytoken-docker-action@0.0.1
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          my-token: ${{ secrets.MYTOKEN }}
+      - name: Indicate that the access token was retireved
+        run: echo "The access token was retireved"
