@@ -17,4 +17,4 @@ runs:
   env:
     MY_TOKEN: ${{ inputs.my-token }}
   args:
-    - "--MT--env=MY_TOKEN"
+    - "--MT-env=MY_TOKEN"
