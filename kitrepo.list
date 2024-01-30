@@ -1,0 +1,3 @@
+# debian bookworm (stable):
+deb [signed-by=/etc/apt/trusted.gpg.d/kitrepo-archive.gpg] https://repo.data.kit.edu//debian/stable ./
+deb [signed-by=/etc/apt/trusted.gpg.d/kitrepo-archive.gpg] https://repo.data.kit.edu//debian/bookworm ./
