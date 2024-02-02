@@ -13,5 +13,6 @@ jobs:
       - id: validate-access-token
         run: |
           curl --request GET \
-          --url https://aai.eosc-portal.eu/oidc/userinfo \
-          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access_token }}'
+          --url https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/userinfo \
+          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access_token }}' \
+          | jq .given_name
