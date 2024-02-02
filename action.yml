@@ -21,6 +21,7 @@ runs:
         ACCESS_TOKEN=$(curl --request POST \
           --url https://mytoken.data.kit.edu/api/v0/token/access \
           --header 'Content-Type: application/json' \
+          --fail --silent --show-error \
           --data '{
             "comment": "Access Token for Github Actions",
             "grant_type": "mytoken",
