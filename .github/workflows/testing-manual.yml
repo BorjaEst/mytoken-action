@@ -6,10 +6,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Access Token Test
     steps:
-      - name: Obtain Access Token
-        id: at
-        uses: BorjaEst/mytoken-docker-action@0.0.1
+      - name: Obtain Access Token using GitHub Action
+        id: get-access-token
+        uses: BorjaEst/mytoken-action@0.1.0
         with:
           my-token: ${{ secrets.MYTOKEN }}
-      - name: Indicate that the access token was retireved
-        run: echo "The access token was retireved"
+      - name: Validate Access Token at EGI-AAI
+        run: |
+          curl --request GET \
+          --url https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/userinfo \
+          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access-token }}' \
+          --fail-with-body --silent --show-error \
+          | jq --exit-status .given_name

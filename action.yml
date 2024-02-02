@@ -1,4 +1,4 @@
-name: MyToken Docker Action
+name: MyToken Action
 description: Github Action to obtain an OIDC access token form a MyToken secret
 author: Karlsruhe Institute of Technology
 
@@ -10,11 +10,21 @@ inputs:
 outputs:
   access-token:
     description: The access token to use in future requests
+    value: ${{ steps.get-access-token.outputs.access-token }}
 
 runs:
-  using: docker
-  image: Dockerfile
-  env:
-    MY_TOKEN: ${{ inputs.my-token }}
-  args:
-    - "--MT-env=MY_TOKEN"
+  using: composite
+  steps:
+    - id: get-access-token
+      shell: bash
+      run: |
+        ACCESS_TOKEN=$(curl --request POST \
+          --url https://mytoken.data.kit.edu/api/v0/token/access \
+          --header 'Content-Type: application/json' \
+          --fail-with-body --silent --show-error \
+          --data '{
+            "comment": "Access Token for Github Actions",
+            "grant_type": "mytoken",
+            "mytoken": "${{ inputs.my-token }}"
+        }' | jq -re .access_token)
+        echo "access-token=$ACCESS_TOKEN" >> $GITHUB_OUTPUT
