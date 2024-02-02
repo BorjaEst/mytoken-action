@@ -26,5 +26,5 @@ runs:
             "comment": "Access Token for Github Actions",
             "grant_type": "mytoken",
             "mytoken": "${{ inputs.my-token }}"
-        }' | jq -r .access_token)
+        }' | jq -re .access_token)
         echo "access-token=$ACCESS_TOKEN" >> $GITHUB_OUTPUT

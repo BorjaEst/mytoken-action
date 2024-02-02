@@ -16,4 +16,5 @@ jobs:
           curl --request GET \
           --url https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/userinfo \
           --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access-token }}' \
-          --fail-with-body --silent --show-error
+          --fail-with-body --silent --show-error \
+          | jq --exit-status .given_name
