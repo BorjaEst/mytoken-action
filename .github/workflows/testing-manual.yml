@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Obtain Access Token
         id: at
-        uses: BorjaEst/mytoken-docker-action@0.0.1
+        uses: BorjaEst/mytoken-docker-action@0.1.0
         with:
           my-token: ${{ secrets.MYTOKEN }}
       - name: Indicate that the access token was retireved

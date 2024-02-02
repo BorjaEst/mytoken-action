@@ -17,7 +17,7 @@ The OIDC access token to be used in the workflow.
 ## Example usage
 
 ```yaml
-uses: BorjaEst/mytoken-docker-action@0.0.1
+uses: BorjaEst/mytoken-docker-action@0.1.0
 with:
   my-token: ${{ secrets.MYTOKEN }}
 ```
