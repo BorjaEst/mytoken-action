@@ -6,13 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Access Token Test
     steps:
-      - id: get-access-token
+      - name: Obtain Access Token using GitHub Action
+        id: get-access-token
         uses: BorjaEst/mytoken-docker-action@0.1.0
         with:
           my-token: ${{ secrets.MYTOKEN }}
-      - id: validate-access-token
+      - name: Validate Access Token at EGI-AAI
         run: |
           curl --request GET \
           --url https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/userinfo \
-          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access_token }}' \
+          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access-token }}' \
           --fail-with-body --silent --show-error
