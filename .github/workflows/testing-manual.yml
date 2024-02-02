@@ -6,10 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Access Token Test
     steps:
-      - name: Obtain Access Token
-        id: at
+      - id: get-access-token
         uses: BorjaEst/mytoken-docker-action@0.1.0
         with:
           my-token: ${{ secrets.MYTOKEN }}
-      - name: Indicate that the access token was retireved
-        run: echo "The access token was retireved"
+      - id: validate-access-token
+        run: |
+          curl --request GET \
+          --url https://aai.eosc-portal.eu/oidc/userinfo \
+          --header 'Authorization: Bearer ${{ steps.get-access-token.outputs.access_token }}'
