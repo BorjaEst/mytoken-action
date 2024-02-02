@@ -18,11 +18,12 @@ runs:
     - id: get-access-token
       shell: bash
       run: |
-        curl --request POST \
+        ACCESS_TOKEN=$(curl --request POST \
           --url https://mytoken.data.kit.edu/api/v0/token/access \
           --header 'Content-Type: application/json' \
           --data '{
             "comment": "Access Token for Github Actions",
             "grant_type": "mytoken",
             "mytoken": "${{ inputs.my-token }}"
-        }' >> $GITHUB_OUTPUT
+        }' | jq -r .access_token)
+        echo "access-token=$ACCESS_TOKEN" >> $GITHUB_OUTPUT
