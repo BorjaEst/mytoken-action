@@ -1,3 +1,4 @@
+name: Manual Access Token Workflow
 on:
   workflow_dispatch:
 
@@ -8,7 +9,7 @@ jobs:
     steps:
       - name: Obtain Access Token using GitHub Action
         id: get-access-token
-        uses: BorjaEst/mytoken-action@0.1.0
+        uses: BorjaEst/mytoken-action@dev
         with:
           my-token: ${{ secrets.MYTOKEN }}
       - name: Validate Access Token at EGI-AAI
